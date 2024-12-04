@@ -67,11 +67,11 @@
                                   }
                               },
                               {
-                                "name": "hiddenArcPaneOfGlassLoad",
+                                "name": "errorWorkbooksNotFound",
                                 "type": "Microsoft.Common.InfoBox",
-                                "visible": false,
+                                "visible": "[greaterOrEquals(length(steps('deploymentConfig').updateDeploymentSection.workbooksApi.value), 2)]",
                                 "options": {
-                                    "text": "[parse(concat('[\"',first(filter(steps('deploymentConfig').updateDeploymentSection.workbooksApi.value,(item) => contains(item.properties.displayName,'Arc SQL Single Pane of Glass'))).properties.displayName,' - ',first(filter(steps('deploymentConfig').updateDeploymentSection.workbooksApi.value,(item) => contains(item.properties.displayName,'Arc SQL Single Pane of Glass'))).name,'\"]'))]",
+                                    "text": "[concat('No workbooks found in the current subscription and resource group. Please make sure the workbooks are deployed in the subscription: ', subscription().name, ' and resource group: ', resourceGroup().name, '.')]",
                                     "style": "Error"
                                 }
                               },
