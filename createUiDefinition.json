@@ -119,8 +119,8 @@
           "location": "[steps('basics').resourceScope.location.name]",
           "resourceGroupId": "[steps('basics').resourceScope.resourceGroup.id]",
           "parameters": {
-              "paneOfGlassGuid": "[if(equals(steps('basics').updateDeployment,true),steps('deploymentConfig').updateDeploymentSection.paneOfGlassDropDown.value,'newDeployment')]",
-              "licenseSummaryGuid": "[if(equals(steps('basics').updateDeployment,true),steps('deploymentConfig').updateDeploymentSection.licenseSummaryDropDown.value,'newDeployment')]"
+              "paneOfGlassGuid": "[if(equals(steps('basics').updateDeployment,true),steps('deploymentConfig').updateDeploymentSection.paneOfGlassDropDown,'newDeployment')]",
+              "licenseSummaryGuid": "[if(equals(steps('basics').updateDeployment,true),steps('deploymentConfig').updateDeploymentSection.licenseSummaryDropDown,'newDeployment')]"
           }
       }
   }
