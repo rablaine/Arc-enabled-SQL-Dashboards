@@ -71,7 +71,7 @@
                                 "type": "Microsoft.Common.InfoBox",
                                 "visible": "[less(length(steps('deploymentConfig').updateDeploymentSection.workbooksApi.value), 2)]",
                                 "options": {
-                                    "text": "No Resource Group Found",
+                                    "text": "[concat('No workbooks found in the current subscription and resource group. Please make sure the workbooks are deployed in the subscription: ', steps('basics').resourceScope.subscription.displayName, ' and resource group: ', steps('basics').resourceScope.resourceGroup.name, '.')]",
                                     "style": "Error"
                                 }
                               },
