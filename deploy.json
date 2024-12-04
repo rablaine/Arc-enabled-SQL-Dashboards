@@ -1,26 +1,8 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.1.0",
-    "parameters": {
-      "paneOfGlassGuid": {
-        "type": "string",
-        "metadata": {
-          "description": "The GUID of the SQL Single Pane of Glass Workbook"
-        },
-        "defaultValue": "newDeployment"
-      },
-      "licenseSummaryGuid": {
-        "type": "string",
-        "metadata": {
-          "description": "The GUID of the SQL Licensing Workbook"
-        },
-        "defaultValue": "newDeployment"
-      }
-    },
-    "variables": {
-      "varPaneOfGlassGuid": "[if(equals(parameters('paneOfGlassGuid'), 'newDeployment'), guid(resourceGroup().id, deployment().name, 'paneofglass'), parameters('paneOfGlassGuid'))]",
-      "varLicenseSummaryGuid": "[if(equals(parameters('licenseSummaryGuid'), 'newDeployment'), guid(resourceGroup().id, deployment().name, 'licensesummary'), parameters('licenseSummaryGuid'))]"
-    },
+    "contentVersion": "1.0.0.0",
+    "parameters": {},
+    "variables": {},
     "resources": [
       {
         "type": "Microsoft.Resources/deployments",
@@ -30,12 +12,7 @@
           "mode": "Incremental",
           "templateLink": {
             "uri":"https://raw.githubusercontent.com/SMC-Presales-Accelerators/Arc-enabled-SQL-Dashboards/main/Workbooks/SQL%20Licensing%20Summary.json",
-            "contentVersion":"1.0.1.0"
-          },
-          "parameters": {
-            "workbookId": {
-                "value": "[variables('varLicenseSummaryGuid')]"
-            }
+            "contentVersion":"1.0.0.0"
           }
         }
       },
@@ -50,14 +27,11 @@
           "mode": "Incremental",
           "templateLink": {
             "uri":"https://raw.githubusercontent.com/SMC-Presales-Accelerators/Arc-enabled-SQL-Dashboards/main/Workbooks/Arc%20SQL%20Single%20Pane%20of%20Glass.json",
-            "contentVersion":"1.0.1.0"
+            "contentVersion":"1.0.0.0"
           },
           "parameters": {
             "licensingWorkbookId": {
                 "value": "[reference('sqlLicensingWorkbook').outputs.workbookId.value]"
-            },
-            "workbookId": {
-                "value": "[variables('varPaneOfGlassGuid')]"
             }
           }
         }
