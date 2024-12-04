@@ -4,7 +4,7 @@ This repository contains queries and workbooks to build out an Azure Dashboard t
 ## Deployment
 Click the button below to deploy to your Azure Subscription:
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fcbattlegear%2FArc-enabled-SQL-Dashboards%2Fupdate_ui%2Fdeploy.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fcbattlegear%2FArc-enabled-SQL-Dashboards%2Fupdate_ui%2Fdeploy-ui.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fcbattlegear%2FArc-enabled-SQL-Dashboards%2Fupdate_ui%2Fdeploy.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fcbattlegear%2FArc-enabled-SQL-Dashboards%2Fupdate_ui%2FcreateUiDefinition.json)
 
 ### The General Tab shows a single place with all your SQL resources
 ![Azure Arc Enabled SQL Server Single Pane of Glass General Tab Screenshot](images/general_tab_workbook.png)
