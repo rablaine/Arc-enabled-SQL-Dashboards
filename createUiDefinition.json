@@ -3,7 +3,7 @@
   "view": {
       "kind": "Form",
       "properties": {
-          "title": "Test Form View",
+          "title": "Arc SQL Single Pane of Glass Workbooks",
           "steps": [
               {
                   "name": "basics",
@@ -67,6 +67,15 @@
                                   }
                               },
                               {
+                                "name": "hiddenArcPaneOfGlassLoad",
+                                "type": "Microsoft.Common.InfoBox",
+                                "visible": false,
+                                "options": {
+                                    "text": "[parse(concat('[\"',first(filter(steps('deploymentConfig').updateDeploymentSection.workbooksApi.value,(item) => contains(item.properties.displayName,'Arc SQL Single Pane of Glass'))).properties.displayName,' - ',first(filter(steps('deploymentConfig').updateDeploymentSection.workbooksApi.value,(item) => contains(item.properties.displayName,'Arc SQL Single Pane of Glass'))).name,'\"]'))]",
+                                    "style": "Error"
+                                }
+                              },
+                              {
                                   "name": "paneOfGlassDropDown",
                                   "type": "Microsoft.Common.DropDown",
                                   "label": "Current Single Pane of Glass Workbook",
@@ -111,8 +120,7 @@
           "resourceGroupId": "[steps('basics').resourceScope.resourceGroup.id]",
           "parameters": {
               "paneOfGlassGuid": "[if(equals(steps('basics').updateDeployment,true),steps('deploymentConfig').updateDeploymentSection.paneOfGlassDropDown.value,'newDeployment')]",
-              "licenseSummaryGuid": "[if(equals(steps('basics').updateDeployment,true),steps('deploymentConfig').updateDeploymentSection.licenseSummaryDropDown.value,'newDeployment')]",
-              "location": "[steps('basics').resourceScope.location.name]"
+              "licenseSummaryGuid": "[if(equals(steps('basics').updateDeployment,true),steps('deploymentConfig').updateDeploymentSection.licenseSummaryDropDown.value,'newDeployment')]"
           }
       }
   }
