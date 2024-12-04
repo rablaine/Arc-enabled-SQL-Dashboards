@@ -69,9 +69,9 @@
                               {
                                 "name": "errorWorkbooksNotFound",
                                 "type": "Microsoft.Common.InfoBox",
-                                "visible": "[greaterOrEquals(length(steps('deploymentConfig').updateDeploymentSection.workbooksApi.value), 2)]",
+                                "visible": "[less(length(steps('deploymentConfig').updateDeploymentSection.workbooksApi.value), 2)]",
                                 "options": {
-                                    "text": "[concat('No workbooks found in the current subscription and resource group. Please make sure the workbooks are deployed in the subscription: ', subscription().name, ' and resource group: ', resourceGroup().name, '.')]",
+                                    "text": "[concat('No workbooks found in the current subscription and resource group. Please make sure the workbooks are deployed in the subscription: ', subscription().displayName, ' and resource group: ', resourceGroup().name, '.')]",
                                     "style": "Error"
                                 }
                               },
