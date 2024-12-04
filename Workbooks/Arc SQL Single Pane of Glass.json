@@ -35,6 +35,13 @@
       "metadata": {
         "description": "The resource Id for the SQL Licensing Summary Workbook"
       }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location for all resources."
+      }
     }
   },
   "variables": {
@@ -46,8 +53,8 @@
     {
       "name": "[parameters('workbookId')]",
       "type": "microsoft.insights/workbooks",
-      "location": "[resourceGroup().location]",
-      "apiVersion": "2022-04-01",
+      "location": "[parameters('location')]",
+      "apiVersion": "2023-06-01",
       "dependsOn": [],
       "kind": "shared",
       "properties": {

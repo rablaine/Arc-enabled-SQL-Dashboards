@@ -12,7 +12,8 @@
         {
             "name": "updateDeployment",
             "type": "Microsoft.Common.CheckBox",
-            "label": "Are you updating an existing deployment?"
+            "label": "Are you updating an existing deployment?",
+            "toolTip": "If you are updating an existing deployment please select this box."
         }
       ],
       "steps": [
@@ -103,7 +104,7 @@
       "outputs": {
 		  "paneOfGlassGuid": "[if(equals(basics('updateDeployment'), true), steps('deploymentConfig').updateDeploymentSection.paneOfGlassDropDown.value, 'newDeployment')]",
           "licenseSummaryGuid": "[if(equals(basics('updateDeployment'), true), steps('deploymentConfig').updateDeploymentSection.licenseSummaryDropDown.value, 'newDeployment')]",
-          "location": "[resourceGroup().location]"
+          "location": "[location()]"
 	  }
     }
   }

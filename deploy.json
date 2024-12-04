@@ -15,7 +15,14 @@
           "description": "The GUID of the SQL Licensing Workbook"
         },
         "defaultValue": "newDeployment"
-      }
+      },
+      "location": {
+        "type": "string",
+        "defaultValue": "[resourceGroup().location]",
+        "metadata": {
+          "description": "Location for all resources."
+        }
+    }
     },
     "variables": {
       "varPaneOfGlassGuid": "[if(equals(parameters('paneOfGlassGuid'), 'newDeployment'), guid(resourceGroup().id, deployment().name, 'paneofglass'), parameters('paneOfGlassGuid'))]",
@@ -24,24 +31,27 @@
     "resources": [
       {
         "type": "Microsoft.Resources/deployments",
-        "apiVersion": "2022-09-01",
+        "apiVersion": "2023-07-01",
         "name": "sqlLicensingWorkbook",
         "properties": {
           "mode": "Incremental",
           "templateLink": {
-            "uri":"https://raw.githubusercontent.com/SMC-Presales-Accelerators/Arc-enabled-SQL-Dashboards/main/Workbooks/SQL%20Licensing%20Summary.json",
+            "uri":"https://raw.githubusercontent.com/cbattlegear/Arc-enabled-SQL-Dashboards/update_ui/Workbooks/SQL%20Licensing%20Summary.json",
             "contentVersion":"1.0.1.0"
           },
           "parameters": {
             "workbookId": {
                 "value": "[variables('varLicenseSummaryGuid')]"
+            },
+            "location": {
+                "value": "[parameters('location')]"
             }
           }
         }
       },
       {
         "type": "Microsoft.Resources/deployments",
-        "apiVersion": "2022-09-01",
+        "apiVersion": "2023-07-01",
         "name": "singlePaneofGlassWorkbook",
         "dependsOn": [
             "[resourceId('Microsoft.Resources/deployments', 'sqlLicensingWorkbook')]"
@@ -49,7 +59,7 @@
         "properties": {
           "mode": "Incremental",
           "templateLink": {
-            "uri":"https://raw.githubusercontent.com/SMC-Presales-Accelerators/Arc-enabled-SQL-Dashboards/main/Workbooks/Arc%20SQL%20Single%20Pane%20of%20Glass.json",
+            "uri":"https://raw.githubusercontent.com/cbattlegear/Arc-enabled-SQL-Dashboards/update_ui/Workbooks/Arc%20SQL%20Single%20Pane%20of%20Glass.json",
             "contentVersion":"1.0.1.0"
           },
           "parameters": {
@@ -58,6 +68,9 @@
             },
             "workbookId": {
                 "value": "[variables('varPaneOfGlassGuid')]"
+            },
+            "location": {
+                "value": "[parameters('location')]"
             }
           }
         }
