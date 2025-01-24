@@ -35,7 +35,7 @@ jobs:
         with:
           connection_string: ${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}
           container_name: dev
-          source_folder: build\upload\
+          source_folder: build/upload/
 
       - uses: azure/login@v2
         with:
