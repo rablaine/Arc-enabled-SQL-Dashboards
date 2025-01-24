@@ -50,4 +50,4 @@ echo "Copying files to build/upload directory"
 cp -r Templates/* "build/upload/$datetime/"
 cp build/deploy.json "build/upload/$datetime/"
 
-echo "Generated ARM Template available at \"https://arcdashprupload.blob.core.windows.net/dev/$datetime/deploy.json\" for 90 days"
+echo "output=Generated ARM Template available at https://arcdashprupload.blob.core.windows.net/dev/$datetime/deploy.json for 90 days" >> $GITHUB_ENV
