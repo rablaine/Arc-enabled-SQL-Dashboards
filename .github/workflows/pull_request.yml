@@ -30,6 +30,13 @@ jobs:
       - name: Run build script
         run: .github/scripts/build_pr.sh
 
+      - uses: LanceMcCarthy/Action-AzureBlobUpload@v2
+        name: Uploading to Azure storage...
+        with:
+          connection_string: ${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}
+          container_name: dev
+          source_folder: build\upload\
+
       - uses: azure/login@v2
         with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}

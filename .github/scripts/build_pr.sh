@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Create datetime string for upload
+datetime=$(date '+%Y%m%d%H%M%S')
+
 # Create working directories if they aren't present
 rm -rf build
 mkdir -p build
@@ -32,3 +35,16 @@ echo "Replacing Single Pane of Glass Workbook JSON in Template placeholders"
 # Replace Placeholders in Template with Single Pane of Glass Workbook JSON
 sed -i "s^SPOG_PART_ONE^$spog_part_one^g" 'build/Templates/ArcSQLSinglePaneofGlass.json'
 sed -i "s^SPOG_PART_TWO^$spog_part_two^g" 'build/Templates/ArcSQLSinglePaneofGlass.json'
+
+echo "Replacing URIs in deploy.json with the correct release URIs"
+
+sed -i "s^\"uri\":\"Templates/SQLLicensingSummary.json\"^\"uri\":\"https://arcdashprupload.blob.core.windows.net/dev/$$datetime/SQLLicensingSummary.json\"^g" 'build/deploy.json'
+sed -i "s^\"uri\":\"Templates/ArcSQLSinglePaneofGlass.json\"^\"uri\":\"https://arcdashprupload.blob.core.windows.net/dev/$$datetime/ArcSQLSinglePaneofGlass.json\"^g" 'build/deploy.json'
+
+rm -rf build/upload
+mkdir -p build/upload
+
+mkdir -p "build/upload/$datetime"
+
+echo "Copying files to build/upload directory"
+cp -r Templates/* "build/upload/$datetime/"
