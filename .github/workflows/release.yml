@@ -7,7 +7,7 @@ on:
   # Triggers the workflow on tag creation to push out a release
   push:
     tags:
-    - '*'
+    - 'v*'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -21,31 +21,34 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-      
-      - name: Remove Queries from release
-        run: rm -rf ./Queries/
+      - uses: actions/checkout@v4
 
-      - name: Remove git content from release
-        run: |
-          rm -rf ./.git/
-          rm -rf ./.github/
-      
-      # Fail build if any of the sub ids/local names are in the files
-      - name: Prevent hard coded values in release
-        run: |
-          findcount=$(grep -E 'bf6f4347-a173-4c3b-8071-34dcb2154938|arc-la' */*.json | wc -l)
-          if [ $findcount -gt 0 ]
-          then
-            echo Found one of our hardcoded subscription ids or workspaces, please recheck the dashboard and workbook templates
-            exit 1
-          fi
+      - name: Make build script executable
+        run: chmod +x .github/scripts/build.sh
           
       # Zip the deployment for distribution
-      - name: Zip deployment to arc-enabled-sql-dashboards.zip
-        run: zip -r -q arc-enabled-sql-dashboards.zip .
+      - name: Run build script
+        run: .github/scripts/build.sh ${{ github.ref_name }} ${{ github.repository }}
       
-      # Add the deployment to the tag to make a release
-      - uses: ncipollo/release-action@v1
-        with:
-          artifacts: "arc-enabled-sql-dashboards.zip"
+      - name: Create Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh release create --draft "${{ github.ref_name }}" --title "${{ github.ref_name }}" --generate-notes
+
+      - name: Upload Template Files to Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh release upload "${{ github.ref_name }}" "build/deploy.json" "build/createUiDefinition.json" "build/Templates/Arc SQL Single Pane of Glass.json" "build/Templates/SQL Licensing Summary.json"
+
+  publish:
+    name: Publish Release
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Publish Release
+      env:
+        GH_TOKEN: ${{ github.token }}
+        GH_REPO: ${{ github.repository }}
+      run: gh release edit "${{ github.ref_name }}" --draft=false
