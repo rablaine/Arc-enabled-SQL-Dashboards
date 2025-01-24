@@ -36,7 +36,7 @@
         "properties": {
           "mode": "Incremental",
           "templateLink": {
-            "uri":"Templates/SQL%20Licensing%20Summary.json",
+            "uri":"Templates/SQLLicensingSummary.json",
             "contentVersion": "1.0.1.0"
           },
           "parameters": {
@@ -59,7 +59,7 @@
         "properties": {
           "mode": "Incremental",
           "templateLink": {
-            "uri":"Templates/Arc%20SQL%20Single%20Pane%20of%20Glass.json",
+            "uri":"Templates/ArcSQLSinglePaneofGlass.json",
             "contentVersion": "1.0.1.0"
           },
           "parameters": {
