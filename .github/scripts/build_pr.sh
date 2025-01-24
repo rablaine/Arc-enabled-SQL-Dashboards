@@ -38,8 +38,8 @@ sed -i "s^SPOG_PART_TWO^$spog_part_two^g" 'build/Templates/ArcSQLSinglePaneofGla
 
 echo "Replacing URIs in deploy.json with the correct release URIs"
 
-sed -i "s^\"uri\":\"Templates/SQLLicensingSummary.json\"^\"uri\":\"https://arcdashprupload.blob.core.windows.net/dev/$$datetime/SQLLicensingSummary.json\"^g" 'build/deploy.json'
-sed -i "s^\"uri\":\"Templates/ArcSQLSinglePaneofGlass.json\"^\"uri\":\"https://arcdashprupload.blob.core.windows.net/dev/$$datetime/ArcSQLSinglePaneofGlass.json\"^g" 'build/deploy.json'
+sed -i "s^\"uri\":\"Templates/SQLLicensingSummary.json\"^\"uri\":\"https://arcdashprupload.blob.core.windows.net/dev/$datetime/SQLLicensingSummary.json\"^g" 'build/deploy.json'
+sed -i "s^\"uri\":\"Templates/ArcSQLSinglePaneofGlass.json\"^\"uri\":\"https://arcdashprupload.blob.core.windows.net/dev/$datetime/ArcSQLSinglePaneofGlass.json\"^g" 'build/deploy.json'
 
 rm -rf build/upload
 mkdir -p build/upload
