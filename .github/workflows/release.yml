@@ -42,13 +42,8 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: gh release upload "${{ github.ref_name }}" "build/deploy.json" "build/createUiDefinition.json" "build/Templates/ArcSQLSinglePaneofGlass.json" "build/Templates/SQLLicensingSummary.json"
 
-  publish:
-    name: Publish Release
-    needs: [build]
-    runs-on: ubuntu-latest
-    steps:
-    - name: Publish Release
-      env:
-        GH_TOKEN: ${{ github.token }}
-        GH_REPO: ${{ github.repository }}
-      run: gh release edit "${{ github.ref_name }}" --draft=false
+      - name: Publish Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh release edit "${{ github.ref_name }}" --draft=false
