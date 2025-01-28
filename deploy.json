@@ -36,8 +36,8 @@
         "properties": {
           "mode": "Incremental",
           "templateLink": {
-            "uri":"https://raw.githubusercontent.com/SMC-Presales-Accelerators/Arc-enabled-SQL-Dashboards/main/Workbooks/SQL%20Licensing%20Summary.json",
-            "contentVersion":"1.0.1.0"
+            "uri":"Templates/SQLLicensingSummary.json",
+            "contentVersion": "1.0.1.0"
           },
           "parameters": {
             "workbookId": {
@@ -59,8 +59,8 @@
         "properties": {
           "mode": "Incremental",
           "templateLink": {
-            "uri":"https://raw.githubusercontent.com/SMC-Presales-Accelerators/Arc-enabled-SQL-Dashboards/main/Workbooks/Arc%20SQL%20Single%20Pane%20of%20Glass.json",
-            "contentVersion":"1.0.1.0"
+            "uri":"Templates/ArcSQLSinglePaneofGlass.json",
+            "contentVersion": "1.0.1.0"
           },
           "parameters": {
             "licensingWorkbookId": {
