@@ -1,8 +1,6 @@
 # Arc-enabled-SQL-Dashboards
 This repository contains queries and workbooks to build out an Azure Dashboard to view Arc-enabled SQL Servers.
 
-https://github.com/cbattlegear/ReleaseTest/releases/latest/download/
-
 ## Deployment
 Click the button below to deploy to your Azure Subscription:
 
