@@ -49,6 +49,7 @@ sed -i "s^\"uri\":\"Templates/ArcSQLSinglePaneofGlass.json\"^\"uri\":\"https://a
 
 sed -i "s^\!\[Deploy to Azure\]\(https:\/\/aka\.ms\/deploytoazurebutton\)\(\S+\)^[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Farcdashprupload.blob.core.windows.net%2Frelease%2F$1%2Fdeploy.json/uiFormDefinitionUri/https%3A%2F%2Farcdashprupload.blob.core.windows.net%2Frelease%2F$1%2FcreateUiDefinition.json)^g" "README.md"
 
+mkdir -p "build/upload/$1"
 echo "Copying files to build/upload directory"
 cp -r build/Templates/* "build/upload/$1/"
 cp build/deploy.json "build/upload/$1/"
