@@ -47,7 +47,8 @@ mkdir -p build/upload
 mkdir -p "build/upload/$datetime"
 
 echo "Copying files to build/upload directory"
-cp -r Templates/* "build/upload/$datetime/"
+cp -r build/Templates/* "build/upload/$datetime/"
 cp build/deploy.json "build/upload/$datetime/"
+cp build/createUiDefinition.json "build/upload/$datetime/"
 
 echo "output=Generated ARM Template available at https://arcdashprupload.blob.core.windows.net/dev/$datetime/deploy.json for 90 days" >> $GITHUB_ENV
