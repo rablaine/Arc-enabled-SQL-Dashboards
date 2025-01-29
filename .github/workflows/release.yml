@@ -13,6 +13,7 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
+    if: github.actor == 'github-actions[bot]'
     permissions:
       contents: write
     # The type of runner that the job will run on
@@ -81,3 +82,8 @@ jobs:
           author_email: '41898282+github-actions[bot]@users.noreply.github.com'
           message: Update Deployment Url to current release
           add: README.md
+
+      - name: Update Git Tag
+        uses: jimeh/update-tags-action@v1
+        with:
+          tags: ${{ github.ref_name }}

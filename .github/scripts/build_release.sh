@@ -15,6 +15,10 @@ cp -r Workbooks build/
 cp createUiDefinition.json build/
 cp deploy.json build/
 
+echo "Updating version in the Single Pane of Glass Workbook check"
+
+sed -E -i "s^https:\/\/arc-enabled-sql-workbook-version\.azurewebsites\.net\/api\/check_version\/v\d+\.\d+\.\d+^https://arc-enabled-sql-workbook-version.azurewebsites.net/api/check_version/$1^g" "build/Workbooks/ArcSQLSinglePaneofGlass.json"
+
 echo "Serializing Workbook JSON Files"
 # Read the license workbook JSON file into a variable and properly escape for ARM template
 license_workbook_json=$(cat 'build/Workbooks/SQLLicensingSummary.json' | sed -e 's/\\/\\\\/g' -e 's/"/\\"/g' | sed -e 's/\\/\\\\/g' | tr -d '\r\n')
