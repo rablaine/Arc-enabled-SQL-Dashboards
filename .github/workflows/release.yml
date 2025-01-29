@@ -76,7 +76,9 @@ jobs:
             resource-group-name: ${{ secrets.AZURE_RESOURCE_GROUP }}
             template-file: build/deploy.json
 
-      - uses: EndBug/add-and-commit@v9
+      - name: Commit Deployment Url
+        id: commit
+        uses: EndBug/add-and-commit@v9
         with:
           author_name: github-actions
           author_email: '41898282+github-actions[bot]@users.noreply.github.com'
@@ -87,3 +89,4 @@ jobs:
         uses: jimeh/update-tags-action@v1
         with:
           tags: ${{ github.ref_name }}
+          ref: ${{ steps.commit.outputs.commit_long_sha}}
