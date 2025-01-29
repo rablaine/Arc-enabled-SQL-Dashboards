@@ -47,7 +47,7 @@ echo "Replacing URIs in deploy.json with the correct release URIs"
 sed -i "s^\"uri\":\"Templates/SQLLicensingSummary.json\"^\"uri\":\"https://arcdashprupload.blob.core.windows.net/release/$1/SQLLicensingSummary.json\"^g" 'build/deploy.json'
 sed -i "s^\"uri\":\"Templates/ArcSQLSinglePaneofGlass.json\"^\"uri\":\"https://arcdashprupload.blob.core.windows.net/release/$1/ArcSQLSinglePaneofGlass.json\"^g" 'build/deploy.json'
 
-sed -i "s^\[\!\[Deploy to Azure\]\(https:\/\/aka\.ms\/deploytoazurebutton\)\]\(\S+\)^[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Farcdashprupload.blob.core.windows.net%2Frelease%2F$1%2Fdeploy.json/uiFormDefinitionUri/https%3A%2F%2Farcdashprupload.blob.core.windows.net%2Frelease%2F$1%2FcreateUiDefinition.json)^g" "README.md"
+sed -E -i "s^\[\!\[Deploy to Azure\]\(https:\/\/aka\.ms\/deploytoazurebutton\)\]\(\S+\)^[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Farcdashprupload.blob.core.windows.net%2Frelease%2F$1%2Fdeploy.json/uiFormDefinitionUri/https%3A%2F%2Farcdashprupload.blob.core.windows.net%2Frelease%2F$1%2FcreateUiDefinition.json)^g" "README.md"
 
 mkdir -p "build/upload/$1"
 echo "Copying files to build/upload directory"
