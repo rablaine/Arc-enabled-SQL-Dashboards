@@ -23,9 +23,11 @@ spog_workbook_json=$(cat 'build/Workbooks/ArcSQLSinglePaneofGlass.json' | sed -e
 echo "Splitting Single Pane of Glass Workbook JSON into two parts for ARM Template"
 echo "This uses ^ as the split character, so if this is in the JSON it will cause an issue"
 # Going to change placeholder to ^ character so I can properly split, I assume this will cause me a problem in the future
+set -f
 spog_placeholder=$(echo $spog_workbook_json | sed 's/REPLACE_THE_LICENSE_TEMPLATE_ID/^/g')
 spog_part_one=$(echo $spog_placeholder | cut -d '^' -f 1)
 spog_part_two=$(echo $spog_placeholder | cut -d '^' -f 2)
+set +f
 
 echo "Replacing License Workbook JSON in Template placeholders"
 # Replace Placeholder in Template with License Workbook JSON
@@ -40,6 +42,8 @@ echo "Replacing URIs in deploy.json with the correct release URIs"
 
 sed -i "s^\"uri\":\"Templates/SQLLicensingSummary.json\"^\"uri\":\"https://arcdashprupload.blob.core.windows.net/dev/$datetime/SQLLicensingSummary.json\"^g" 'build/deploy.json'
 sed -i "s^\"uri\":\"Templates/ArcSQLSinglePaneofGlass.json\"^\"uri\":\"https://arcdashprupload.blob.core.windows.net/dev/$datetime/ArcSQLSinglePaneofGlass.json\"^g" 'build/deploy.json'
+
+sleep 1
 
 rm -rf build/upload
 mkdir -p build/upload
